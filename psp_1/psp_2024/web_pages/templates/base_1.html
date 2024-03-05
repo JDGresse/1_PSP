@@ -1,0 +1,185 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <link rel="icon" href="{% static 'images/logo.ico' %}"" type="image/x-icon">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>
+            {% block title %}
+            {% endblock title %}
+        </title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <!-- Slider Style -->
+        <script src="{% static 'splide.min.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'css/splide.min.css' %}">
+        <script>
+            document.addEventListener( 'DOMContentLoaded', function () {
+                new Splide( '#image-carousel', {
+                cover : true,
+                heightRatio : .4,
+                type    : 'loop',
+                perPage : 1,
+                autoplay: true,
+                } ).mount();
+            } );
+        </script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Parisienne">
+
+        <style>
+            .slide__1__h1 {
+                font-family: 'Parisienne', cursive;
+                font-size: 100px;
+                text-align: center;
+                font-weight: 20;
+                padding-top: 60px;
+            }
+
+            .slide__1__text {
+                font-family: 'Cambria', serif;
+                font-size: 60px;
+                text-align: center;
+                font-weight: 20;
+                padding-top: 21.5%;
+            }
+
+            .footer {
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            inline: true;
+            color: #555;
+            font-family: 'Lato', sans-serif;
+            font-size: 14px;
+            line-height: 1.8;
+            box-sizing: border-box;
+            margin-right: auto;
+            margin-left: auto;
+            width: 1170px;
+            }
+
+        </style>
+
+    </head>
+
+    <body>
+        <div class="htmlmenu-wrapper">
+            <div class="htmlmenu-header">
+                <div class="htmlmenu-container">
+                    <div class="htmlmenu-logo">
+                        <a href="/">
+                        <img src="{% static 'images/psp_png.png' %}" alt="htmlmenu">
+                        </a>
+                    </div>
+                    <input type="checkbox" id="htmlmenu-toggle" class="htmlmenu-toggle">
+                    <label for="htmlmenu-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </label>
+                    <nav class="htmlmenu-menu htmlmenu-menu-style-3 htmlmenu-submenu-scale" role="navigation">
+                        <ul>
+                            <li {% if request.path == '/' %} class="htmlmenu-menu-current" {% endif %}>
+                                <a href="{% url 'web_pages:home' %}">Home</a>
+                            </li>
+                            <li {% if request.path == '/about/' %} class="htmlmenu-menu-current" {% endif %}>
+                                <a href="{% url 'web_pages:about' %}">About</a>
+                            </li>
+                            <li {% if request.path == '/psychotherapy/' %} class="htmlmenu-menu-current" {% endif %}>
+                                <a href="{% url 'web_pages:psychotherapy' %}">Psychotherapy</a>
+                            </li>
+                            <li {% if request.path == '/what-to-expect/' %} class="htmlmenu-menu-current" {% endif %}>
+                                <a href="{% url 'web_pages:what-to-expect' %}">What to Expect</a>
+                            </li>
+                            <li {% if request.path == '/adhd-support/' %} class="htmlmenu-menu-current" {% endif %}>
+                                <a href="{% url 'web_pages:adhd' %}">AD/HD Support</a>
+                            </li>
+                            <li {% if request.path == '/contact-psp/' %} class="htmlmenu-menu-current" {% endif %} class="htmlmenu-submenu-right">
+                                <a href="{% url 'web_pages:contact' %}">Contact</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="htmlmenu-header-shadow">
+                </div>
+            </div>
+
+            <div class="htmlmenu-header-spacer">
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            (function() {
+                var node = document.querySelector(".htmlmenu-header");
+                var stop = node.offsetTop;
+                var window_last_position = 0;
+                var scroll = window.requestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                window.msRequestAnimationFrame ||
+                window.oRequestAnimationFrame ||
+                // IE Fallback, you can even fallback to onscroll
+                function(callback) {
+                    window.setTimeout(callback, 1000 / 60)
+                };
+
+                var loop = function() {
+                // avoid calculations if not needed
+                if (window_last_position === window.pageYOffset) {
+                    scroll(loop);
+                    return false;
+                } else window_last_position = window.pageYOffset;
+
+                //... calculations
+                if (window_last_position > stop) {
+                    // stick the div
+                    if (node.className.indexOf(" htmlmenu-header-scrolled") === -1) {
+                    node.className = node.className + ' htmlmenu-header-scrolled';
+                    }
+                } else {
+                    // release the div
+                    node.className = node.className.indexOf(' htmlmenu-header-scrolled') >= 0 ? node.className.replace(' htmlmenu-header-scrolled', '') : node.className;
+                }
+
+                    scroll(loop);
+                };
+
+                // call the loop for the first time
+                loop();
+            })();
+        </script>
+
+        {% block content %}
+
+        {% endblock %}
+
+    </body>
+
+    <footer>
+
+        <div style="display: flex; justify-content: space-evenly; margin: 5px 0 5px 0;">
+            <div>
+                &nbsp;© 2024  Cape Town Therapy
+            </div>
+            <div>
+                <i class="glyphicon glyphicon-envelope"></i>
+                <a href="mailto:pennystopforth08@gmail.com">
+                    penny@helderbergtherapy.co.za
+                </a>
+            </div>
+            <div>
+                <i class="glyphicon glyphicon-phone"></i>
+                <a href="tel:0615821096">
+                    (+27) 61 582 1096
+                </a>
+            </div>
+        </div>
+
+    </footer>
+        <grammarly-desktop-integration data-grammarly-shadow-root="true">
+        </grammarly-desktop-integration>
+
+</html>
