@@ -6,3 +6,12 @@ navItems.forEach((item) => {
     item.classList.add("active");
   });
 });
+
+document.getElementById("contactForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  // Send email function here
+
+  document.getElementById("responseMessage").innerText =
+    "Message sent successfully!";
+});

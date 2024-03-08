@@ -5,19 +5,22 @@
 
 
 {% block content %}
-  <div style="display: flex;">
-    <div style="flex: 1;">
-        <img src="{% static 'images/contact.png' %}" alt="ADHD and Neurodiversity" style="margin: 10px 0 10px 150px; max-width: auto; height: 550px;">
+
+    <div style="display: flex;">
+        <div style="flex: 1;">
+            <img src="{% static 'images/meditation.jpg' %}" alt="Contact Me" style="margin-left: 110px; margin-top: 20px; width: 93%; ">
+        </div>
+
+        <div style="flex: 2; margin-left: 110px; margin-top: 20px;">
+            <div class="contact-form">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Submit</button>
+                </form>
+                <div id="responseMessage"></div>
+            </div>
+        </div>
     </div>
-    <div style="flex: 2; margin-left: 130px; margin-right: 40px; margin-top: 30px;">
-      <div class="contact-form">
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Submit</button>
-        </form>
-      </div>
-    </div>
-  </div>
 
 {% endblock content %}
