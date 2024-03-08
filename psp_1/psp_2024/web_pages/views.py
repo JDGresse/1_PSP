@@ -38,8 +38,8 @@ def contact_form(request):
             clean_form = form.cleaned_data
 
             send_mail(
-                subject=f"New Contact Form Submission - {clean_form['subject']}",
-                message=f"Name: {clean_form['name']}\nEmail: {clean_form['email']}\nContact Number: {clean_form['contact_number']}\nService: {clean_form['service']}\n\nMessage: {clean_form['message']}",
+                subject=f"PSP Client Inquiry - {clean_form['subject']}",
+                message=f"Hi, Penny,\n\nYou have just received the following message from your website contact form:\n\nName: {clean_form['your_name']}\nEmail: {clean_form['email']}\nContact Number: {clean_form['contact_number']}\nService: {clean_form['service']}\nSubject: {clean_form['suject']}\n\nMessage:n{clean_form['message']}",
                 from_email=clean_form["email"],
                 recipient_list=["jdgresse01@gmail.com"],
             )
