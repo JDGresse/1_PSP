@@ -46,6 +46,8 @@ def contact_form(request):
                 recipient_list=["pennystopforth08@gmail.com"],
             )
             sent = True
+            
+            return render(request, "web_pages/home.html")
 
     else:
         form = ContactForm()
