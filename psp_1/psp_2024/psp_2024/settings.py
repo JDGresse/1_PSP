@@ -13,21 +13,28 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Configure DOTENV variables
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-oyqsf*r+ilz-)@l6^^4^_dpe9$7$41u#2#08yhn8f$+9_%9by5"
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "www.helderbergtherapy.co.za",
+    "www.neurodivergentsupport.com",
+    "127.0.0.1",
+]
 
 
 # Application definition
@@ -119,6 +126,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
+STATIC_ROOT = "/home/helderbergt/public_html/static"
+
 STATIC_URL = "/static/"
 
 MEDIA_URL = "/images/"
@@ -134,8 +143,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # Email server configuration
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER = "jdgresse01@gmail.com"
-EMAIL_HOST_PASSWORD = "sfxr byqw hgfp veph"
+EMAIL_HOST = os.environ.get("EMAIL_HOST")
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True

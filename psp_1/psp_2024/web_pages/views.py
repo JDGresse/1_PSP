@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.contrib import messages
 from django.core.mail import send_mail
+from django.shortcuts import render
 
 from .forms import ContactForm
 
@@ -36,12 +37,13 @@ def contact_form(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             clean_form = form.cleaned_data
+            messages.success(request, "Email sent successfully.")
 
             send_mail(
                 subject=f"PSP Client Inquiry - {clean_form['subject']}",
-                message=f"Hi, Penny,\n\nYou have just received the following message from your website contact form:\n\nName: {clean_form['your_name']}\nEmail: {clean_form['email']}\nContact Number: {clean_form['contact_number']}\nService: {clean_form['service']}\nSubject: {clean_form['suject']}\n\nMessage:n{clean_form['message']}",
+                message=f"Hi, Penny,\n\nYou have just received the following message from your website:\n\nName: {clean_form['your_name']}\nEmail: {clean_form['email']}\nContact Number: {clean_form['contact_number']}\nService: {clean_form['service']}\n\nSubject: {clean_form['subject']}\n\nMessage:\n{clean_form['message']}",
                 from_email=clean_form["email"],
-                recipient_list=["jdgresse01@gmail.com"],
+                recipient_list=["pennystopforth08@gmail.com"],
             )
             sent = True
 
